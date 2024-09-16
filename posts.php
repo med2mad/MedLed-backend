@@ -93,29 +93,23 @@ else{
             <th width="10">To</th>
         </tr>
 
-        <tr>
-            <td class="rounded" style="border-right:none; overflow:auto;">
-                <a href="post_view.php?id=<?= $r["id"] ?>">
-                    <img src="uploads/profiles/<?= $r["users_img_w"] ?>" width="100" height="100" style="border:solid;object-fit:contain; background-color:black" class="rounded" alt="<?= $name_w ?>">
-                </a>
-                <div style="width:100px;overflow:auto; margin:auto;line-height:15pt;"><a href="post_view.php?id=<?= $r["id"] ?>"><?= $name_w ?></a></div>
+        <tr >
+            <td style="border-right:none;">
+                <img src="uploads/profiles/<?= $r["users_img_w"] ?>" width="100" height="100" style="border:solid;object-fit:contain; background-color:black" class="rounded" alt="<?= $name_w ?>">
+                <div style="width:100px;overflow:auto; margin:auto;line-height:15pt;">
+                    <?= $name_w ?>
+                </div>
             </td>
             
-            <td style="border-left:none; max-width:150px;overflow:auto; vertical-align: top;">
-                <p style="max-height:50px; font-size:1.5em;">
-                    <!-- <a href="post_view.php?id=<?= $r["id"] ?>"> -->
-                    <textarea name="message" id="message" maxlength="500" cols="30" rows="6" class="form-control"><?= $message ?></textarea>
-                    <!-- </a> -->
-                </p>
+            <td style="border-left:solid 1px black; max-width:150px;overflow:auto;" class="postsTinyMCE">
+                <textarea name="message" id="message" maxlength="500" cols="30" rows="6" class="form-control"><?= $message ?></textarea>
             </td>
             
             <td class="d-none d-md-table-cell"> <?php if($r["file"]!=""){ ?> <a href="uploads/posts/<?= $r["file"] ?>"><img src="files/file.png" width="50" height="50" alt="file"></a> <?php } ?></td>
             
             <td class="bg-secondary rounded" >
-                <a href="post_view.php?id=<?= $r["id"] ?>">
-                    <img src="uploads/profiles/<?= $r["users_img_r"] ?>" width="100" height="100" style="border:solid;object-fit:contain; background-color:black" class="rounded" alt="<?= $name_r ?>">
-                </a>
-                <div style="width:100px;overflow:auto; margin:auto; line-height:15pt;"><a href="post_view.php?id=<?= $r["id"] ?>"><?= $name_r ?></a></div>
+                <img src="uploads/profiles/<?= $r["users_img_r"] ?>" width="100" height="100" style="border:solid;object-fit:contain; background-color:black" class="rounded" alt="<?= $name_r ?>">
+                <div style="width:100px;overflow:auto; margin:auto; line-height:15pt;"><?= $name_r ?></div>
             </td>
         </tr>
         
@@ -160,9 +154,7 @@ else{
         menubar: false,
         toolbar: false,
         readonly: true,
-        content_style: 'body{line-height:1rem;} p{margin: 1px;}',
-        plugins: 'autoresize',
-        autoresize_min_height: 50,
+        content_style: 'body{line-height:1rem;} p{margin:1px;}',
       });
 </script>
 

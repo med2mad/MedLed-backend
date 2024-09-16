@@ -50,13 +50,15 @@
                 left:40px;
                 top:-10px;
             }
+            .postsTinyMCE{padding:0 !important;}
+            .postsTinyMCE .tox-tinymce{height:200px !important; border-radius:0;}
         </style>
 
     </head>
     <body class="container-fluid">
         
         <a href="index.php">
-            <div id="cover" class="row rounded bgdeco" >
+            <div id="cover" class="row rounded bgdeco">
                 <img src="files/medled2.png" alt="">
             </div>
         </a>

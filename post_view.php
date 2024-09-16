@@ -46,7 +46,7 @@
 
         <div style="background-color:rgb(54, 54, 54); padding:10px;  font-size:1em; border:solid white" class="rounded my-2">
             <p style="font-weight:bold; font-size:2em; font-style:italic; color:cornflowerblue; text-align:center; border-bottom:solid">BODY</p>
-            <p style="text-align:center;max-height:250px;overflow:auto;max-width:500px;margin:auto;min-height:80px"><?= $message ?></p>
+            <textarea name="message" id="message" maxlength="500" cols="30" rows="6" class="form-control"><?= $message ?></textarea>
         </div>
 
         <?php if($r["file"]!=""){ ?>
@@ -67,5 +67,17 @@
             </p>
         </div>
     <?php } ?>
+
+    <script src="tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: '#message',
+            menubar: false,
+            toolbar: false,
+            readonly: true,
+            content_style: 'body{line-height:1rem;} p{margin:1px;}',
+
+        });
+    </script>
 
 <?php include ("partials/footer.html"); ?>
