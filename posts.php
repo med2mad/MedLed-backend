@@ -101,7 +101,13 @@ else{
                 <div style="width:100px;overflow:auto; margin:auto;line-height:15pt;"><a href="post_view.php?id=<?= $r["id"] ?>"><?= $name_w ?></a></div>
             </td>
             
-            <td style="border-left:none; max-width:150px;overflow:auto; vertical-align: top;"><p style="max-height:50px; font-size:1.5em;"><a href="post_view.php?id=<?= $r["id"] ?>"><?= $message ?></a></p></td>
+            <td style="border-left:none; max-width:150px;overflow:auto; vertical-align: top;">
+                <p style="max-height:50px; font-size:1.5em;">
+                    <!-- <a href="post_view.php?id=<?= $r["id"] ?>"> -->
+                    <textarea name="message" id="message" maxlength="500" cols="30" rows="6" class="form-control"><?= $message ?></textarea>
+                    <!-- </a> -->
+                </p>
+            </td>
             
             <td class="d-none d-md-table-cell"> <?php if($r["file"]!=""){ ?> <a href="uploads/posts/<?= $r["file"] ?>"><img src="files/file.png" width="50" height="50" alt="file"></a> <?php } ?></td>
             
@@ -146,6 +152,18 @@ else{
     <?php }}?> 
     <a class="text-primary" href="posts.php?page=<?= $pagesnbr ?>&name=<?= $name ?>"> &nbsp; >> &nbsp; </a>
 </p>
-<?php
 
-include ("partials/footer.html"); ?>
+<script src="tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: '#message',
+        menubar: false,
+        toolbar: false,
+        readonly: true,
+        content_style: 'body{line-height:1rem;} p{margin: 1px;}',
+        plugins: 'autoresize',
+        autoresize_min_height: 50,
+      });
+</script>
+
+<?php include ("partials/footer.html"); ?>
