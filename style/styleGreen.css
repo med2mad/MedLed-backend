@@ -1,0 +1,19 @@
+/* 
+  styles that need to be in the same page :
+  style.css , stylePkBeGn.css 
+*/
+
+#side{
+    background-image:url("leaves.png"),url("gnbg.jpg");
+    background-position: left top, left top;
+    background-repeat: no-repeat, repeat;
+    background-size: 75% , fixed;
+}
+.bgdeco {
+  background-image: url("gnbg.jpg");
+  background-attachment: fixed;
+  background-position: top left;
+}
+h1{
+    border: 1px solid black;
+}

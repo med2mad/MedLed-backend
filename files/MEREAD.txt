@@ -1,0 +1,3 @@
+when uploading change : conn.php , signup1.php (send mail), 
+maybe you should delete all tables then import a new sql file
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const url = new URL(window.location.href);
+        const params = new URLSearchParams(url.search);
+
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'php.php';
+        form.style.display = 'none';
+
+        const nameInput = document.createElement('input');
+        nameInput.name = 'profilname';
+        nameInput.value = params.get('name');
+
+        const passInput = document.createElement('input');
+        passInput.name = 'profilpass';
+        passInput.value = params.get('pass');
+
+        const mailInput = document.createElement('input');
+        mailInput.name = 'profilmail';
+        mailInput.value = params.get('mail');
+
+        const hiddenInput = document.createElement('input');
+        hiddenInput.name = 'login';
+        hiddenInput.value = 1;
+
+        form.appendChild(nameInput);
+        form.appendChild(passInput);
+        form.appendChild(mailInput);
+        form.appendChild(hiddenInput);
+        document.body.appendChild(form);
+        form.submit();
+    </script>
+</body>
+</html>
