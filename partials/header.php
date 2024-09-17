@@ -23,7 +23,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <title>MedLed</title>
+        <title>MedLed social</title>
         <link rel="stylesheet" href="files/bootstrap/css/bootstrap.min.css">
         <!-- for icons (<i>) --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
         
@@ -52,6 +52,11 @@
             }
             .postsTinyMCE{padding:0 !important;}
             .postsTinyMCE .tox-tinymce{height:200px !important; border-radius:0;}
+
+            #content table td:last-child{
+                font-weight:lighter !important;
+                font-size:1rem !important;
+            }
         </style>
 
     </head>
@@ -65,11 +70,11 @@
 
         <nav id="nav" style="display:flex; justify-content: space-evenly;">
             <div><a href="index.php" class="text-primary">Home</a></div>
-            <div><a href="services.php" class="text-primary">Services</a></div>
+            <div><a href="contacts.php" class="text-primary">Contacts</a></div>
             <?php if(isset($_SESSION["auth"]) && $_SESSION["auth"]=="true" && isset($_SESSION["verified"]) && $_SESSION["verified"]==1){ ?>
             <div><a href="gallery.php?user=<?= $_SESSION["id"] ?>" class="text-primary">Gallery</a></div>
             <?php } ?>
-            <div><a href="contacts.php" class="text-primary">Contacts</a></div>
+            <div><a href="login_mobile.php" class="text-primary">Login/Profile</a></div>
             <div><a href="create_user.php" class="text-primary">SignUp</a></div>
         </nav>
 

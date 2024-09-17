@@ -34,6 +34,10 @@ if(isset($_POST["signup"]) || isset($_POST["update"])) {
         header("Location: ".$_POST["page"]."?error=Password and Confirmation not identical");
         exit;
     }
+    elseif(!$_POST["conditions"]){
+        header("Location: ".$_POST["page"]."?error=Accept conditions");
+        exit;
+    }
 
     include ("partials/conn.php");
     if(!$c){mysqli_close($c); 

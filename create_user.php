@@ -22,6 +22,9 @@
             </td>
         </tr>
     </table>
+    <div style="margin-top:4px;">
+        <input type="checkbox" name="conditions" required> <label> Accept <a href="conditions.php" style="text-decoration:underline;">Terms &amp; Conditions</a></label>
+    </div>
     <br>
     <input type="submit" name="signup" class="btn btn-primary btn-lg mb-1" value="OK">
 </form>

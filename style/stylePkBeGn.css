@@ -34,7 +34,7 @@ a{
 input{
     box-shadow: 2px 2px #888888;
 }
-#liwhitecss{
+.liwhitecss{
     background:black;
     color:white;
 }
