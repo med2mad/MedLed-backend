@@ -130,13 +130,13 @@
             while($r= mysqli_fetch_array ($d))
             { ?>
                 <div class="col">
-                    <p>
+                    <div>
                         <img id="img<?= ++$i ?>" onclick='document.getElementById("136").src="uploads/gallery/<?= $r["img"] ?>"; /* document.getElementById("galltext").innerHTML="<?= $r["text"] ?>"; */ currentimg=<?= $i ?>' class="rounded my-2 gimg" width="100" height="100" src="uploads/gallery/<?= $r["img"] ?>" alt="gallery">
                         <br><span style="font-family:'Courier New', Courier, monospace;"><?= date ( "d/m/Y"  , strtotime($r["time"]) ) ?></span>
-                        <?php if(isset($_SESSION["auth"]) && $_SESSION["auth"]=="true" && isset($_SESSION["type"]) && $_SESSION["type"]=="admin"){ ?>
-                            <br><a class="btn btn-danger" href="php.php?deletegallery=<?= $r["id"] ?>&img=<?= $r["img"] ?>&page=<?= $currentpage ?>&perpage=<?= $perpage ?>" onclick="return confirm('Delete this image ?');">Delete</a>
+                        <?php if(isset($_SESSION["id"]) && $_SESSION["id"]==$_GET["user"] || isset($_SESSION["type"]) && $_SESSION["type"]=="admin"){ ?>
+                            <p><a class="btn btn-danger" href="php.php?deletegallery=<?= $r["id"] ?>&user=<?= $_SESSION["id"] ?>&img=<?= $r["img"] ?>&page=<?= $currentpage ?>&perpage=<?= $perpage ?>" onclick="return confirm('Delete this image ?');">Delete</a></p>
                         <?php } ?>
-                    </p>
+                    </div>
                 </div>
     <?php   } 
         echo "<script type='text/javascript'>let perpage = $i;</script>";

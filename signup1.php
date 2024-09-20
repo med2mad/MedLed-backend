@@ -16,9 +16,9 @@
 <h1>Welcome</h1>
 
 <div class="alert alert-primary" style="font-size:2em; font-style:italic;">
-   <p>A verification email has been sent with a link to :</p>
+   <p>A verification email holding your credentials has been sent with a link to :</p>
     <p style="overflow:auto; text-decoration:underline;">
-        <?= $_SESSION["mail"] ?>
+        "<?= $_SESSION["mail"] ?>"
     </p>
     <p>Click the link to confirm your email address and activate your account.</p>
 </div>

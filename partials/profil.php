@@ -3,7 +3,7 @@
 <?php if(isset($_SESSION["auth"]) && $_SESSION["auth"]=="true") { ?>
     <p>
         <a href="edit.php">
-            <img src="uploads/profiles/<?= $_SESSION["img"] ?>" alt="" width="100" height="100" class="rounded-circle" id="profile">
+            <img src="uploads/profiles/<?= $_SESSION["photo"] ?>" alt="" width="100" height="100" class="rounded-circle" id="profile">
         </a>
     </p>
 

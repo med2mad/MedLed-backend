@@ -34,6 +34,7 @@
             }
         ?>
         <link rel="stylesheet" href="style/<?php echo $stylechoice; ?>">
+        <link rel="icon" href="files/favicon.png" type="image/png">
 
         <style>
             .notif{

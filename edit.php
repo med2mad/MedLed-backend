@@ -22,19 +22,29 @@
         <tr><td class="rounded"><label for="pass">Password</label></td><td style="width:500px;"><input name="pass" id="pass" value="<?= $pass ?>" type="password" required minlength="5" maxlength="20" class="form-control"></td></tr>
         <tr><td class="rounded" style="font-size:0.8em;padding:0"><label for="pass2">Confirm<br>Password</label></td><td><input name="pass2" id="pass2" value="<?= $pass ?>" type="password" required minlength="5" maxlength="20" class="form-control"></td></tr>
         <tr>
-            <td class="rounded"><label for="img">Photo</label></td>
-            <td style="text-align:center">
-                <input type="button" value="Browse..." onclick="document.getElementById('img').click();" />
-                <input name="img" id="img" type="file" accept=".jpg,.jpeg,.png,.bmp,.gif" class="form-control" style="display:none;"><label for="img"><img id="imgfile" width="100" height="100" style="margin-top:10px; object-fit:contain" src="<?= 'uploads/profiles/' . $_SESSION["img"] ?>" alt="<?= $name ?>"></label>
+            <td class="rounded"><label for="photo">Photo</label></td>
+            <td style="text-align:center; display:flex; gap:10px; align-items:center;">
+                <div>
+                    <input type="button" style="width: 110px; margin:2px;" value="Pick Photo" onclick="document.getElementById('photo').click();" /> <br>
+                    <input type="button" style="width: 110px; margin:2px;" value="No Photo" id="nophoto">
+                </div>
+                <div>
+                    <input name="photo" id="photo" type="file" accept=".jpg,.jpeg,.png,.bmp,.gif" class="form-control" style="display:none;"><label for="photo"><img id="img" width="100" height="100" style="object-fit:contain" src="<?= 'uploads/profiles/' . $_SESSION["photo"] ?>" alt="<?= $name ?>"></label>
+                </div>
             </td>
         </tr>
     </table>
     <br>
     <input type="submit" name="update" class="btn btn-primary btn-lg mb-1" value="OK">
 </form>
+
 <script type="text/javascript">
-    document.getElementById("img").onchange=function(){
-        document.getElementById("imgfile").setAttribute('src',URL.createObjectURL(img.files[0]));
+    document.getElementById("photo").onchange=function() {
+        document.getElementById("img").setAttribute("src",URL.createObjectURL(document.getElementById("photo").files[0]));
+    }
+    document.getElementById("nophoto").onclick=function() {
+        document.getElementById("photo").value= null;
+        document.getElementById("img").setAttribute("src","uploads/profiles/136.jpg");
     }
 </script>
 

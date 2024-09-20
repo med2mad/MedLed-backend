@@ -34,7 +34,7 @@ if(isset($_POST["signup"]) || isset($_POST["update"])) {
         header("Location: ".$_POST["page"]."?error=Password and Confirmation not identical");
         exit;
     }
-    elseif(!$_POST["conditions"]){
+    elseif(!$_POST["conditions"] && isset($_POST["signup"])){
         header("Location: ".$_POST["page"]."?error=Accept conditions");
         exit;
     }
@@ -67,14 +67,14 @@ if(isset($_POST["signup"]) || isset($_POST["update"])) {
 
         $token = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
 
-        $newimgname = ($_POST["page"]=="create_user.php") ? "136.jpg" : $_SESSION["img"];
-        if(isset($_FILES["img"]) && $_FILES["img"]["error"]===0 && $_FILES["img"]["size"]<11048576){
-            $ext= strtolower(pathinfo( $_FILES["img"]["name"], PATHINFO_EXTENSION));
+        $newimgname = ($_POST["page"]=="create_user.php") ? "136.jpg" : $_SESSION["photo"];
+        if(isset($_FILES["photo"]) && $_FILES["photo"]["error"]===0 && $_FILES["photo"]["size"]<11048576){
+            $ext= strtolower(pathinfo( $_FILES["photo"]["name"], PATHINFO_EXTENSION));
             $exts=["png","jpg","jpeg","bmp","gif"];
             if(in_array($ext,$exts))
             {
                 $newimgname=uniqid("IMG-",true).".".$ext;
-                move_uploaded_file($_FILES["img"]["tmp_name"], "uploads/profiles/".$newimgname);
+                move_uploaded_file($_FILES["photo"]["tmp_name"], "uploads/profiles/".$newimgname);
             }
         }
 
@@ -97,7 +97,7 @@ if(isset($_POST["signup"]) || isset($_POST["update"])) {
             $_SESSION["mail"]=$_POST["mail"];
             $_SESSION["pass"]=$_POST["pass"];
             $_SESSION["token"]=$token;
-            $_SESSION["img"]=$newimgname;
+            $_SESSION["photo"]=$newimgname;
     
             if($_SESSION["verified"]==0)
                 header("Location: signup1.php");
@@ -138,7 +138,7 @@ if(isset($_POST["create_gallery"])){
         mysqli_close($c);
     }
 
-    header("Location: gallery.php");
+    header("Location: gallery.php?user=".$_SESSION["mail"]);
     exit;
 }
 
@@ -199,7 +199,7 @@ elseif(isset($_POST["post"])) {
     }
 
     $query="insert into posts(message,file,users_id_w,users_name_w,users_mail_w,users_img_w,users_id_r,users_name_r,users_mail_r,users_img_r)
-                        values('".$message."','".$newfilename."','".$_SESSION["id"]."','".$name_w."','".$mail_w."','".$_SESSION["img"]."','".$id_r."','".$name_r."','".$mail_r."','".$img_r."')";
+                        values('".$message."','".$newfilename."','".$_SESSION["id"]."','".$name_w."','".$mail_w."','".$_SESSION["photo"]."','".$id_r."','".$name_r."','".$mail_r."','".$img_r."')";
     mysqli_query ($c, $query);
     mysqli_close($c);
     header("Location: posts.php");
@@ -364,8 +364,13 @@ elseif(isset($_GET["deletemessage"])){
 }
 
 elseif(isset($_GET["deletegallery"])){
-    if(!isset($_SESSION["auth"]) || $_SESSION["auth"]!="true" || !isset($_SESSION["type"]) || $_SESSION["type"]!="admin" || !isset($_SESSION["verified"]) || $_SESSION["verified"]==0){
+    if(!isset($_SESSION["auth"]) || $_SESSION["auth"]!="true" || !isset($_SESSION["verified"]) || $_SESSION["verified"]==0){
         exit("404 8");
+    }
+    if(isset($_SESSION["type"]) && $_SESSION["type"]=="user"){ //if user is not admin he cannot delete others gallery
+        if($_GET["user"]!=$_SESSION["id"]){
+            exit("404 9");
+        }
     }
 
     include ("partials/conn.php");
@@ -374,10 +379,10 @@ elseif(isset($_GET["deletegallery"])){
     }
     else{
         mysqli_query ($c, "delete from gallery where id=" . $_GET["deletegallery"]) ;
-        if(mysqli_affected_rows($c)<1){mysqli_close($c);exit("404 9");} 
+        if(mysqli_affected_rows($c)<1){mysqli_close($c);exit("404 10");} 
         mysqli_close($c);
         unlink("uploads/gallery/".$_GET["img"]);
-        header("Location: gallery.php?page=".$_GET["page"]."&perpage=".$_GET["perpage"]."#ppp");
+        header("Location: gallery.php?user=".$_GET["user"]."&page=".$_GET["page"]."&perpage=".$_GET["perpage"]."#ppp");
         exit;
     }
 }
@@ -406,7 +411,7 @@ elseif(isset($_POST["login"]))
             $_SESSION["name"]=$r["name"];
             $_SESSION["mail"]=$r["mail"];
             $_SESSION["pass"]=$r["pass"];
-            $_SESSION["img"]=$r["img"];
+            $_SESSION["photo"]=$r["img"];
             $_SESSION["type"]=$r["type"];
             $_SESSION["token"]=$r["token"];
             $_SESSION["blocked"]=$r["blocked"];
