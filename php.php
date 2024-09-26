@@ -34,7 +34,7 @@ if(isset($_POST["signup"]) || isset($_POST["update"])) {
         header("Location: ".$_POST["page"]."?error=Password and Confirmation not identical");
         exit;
     }
-    elseif(!$_POST["conditions"] && isset($_POST["signup"])){
+    elseif(isset($_POST["signup"]) && !$_POST["conditions"]){
         header("Location: ".$_POST["page"]."?error=Accept conditions");
         exit;
     }
@@ -138,7 +138,7 @@ if(isset($_POST["create_gallery"])){
         mysqli_close($c);
     }
 
-    header("Location: gallery.php?user=".$_SESSION["mail"]);
+    header("Location: gallery.php?user=".$_SESSION["id"]);
     exit;
 }
 

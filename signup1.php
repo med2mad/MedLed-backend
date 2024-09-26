@@ -9,7 +9,7 @@
     'Reply-To: mohamed.leghdaich@gmail.com\r\n'.
     'X-Mailer: PHP/' . phpversion();
 
-    send_mail($_SESSION["mail"], "MedLed social account activation", "Username:".$_SESSION["name"]." - Email: ".$_SESSION["mail"]." - Password:".$_SESSION["pass"]."<br><a href=\"localhost/medled/signup2.php?token=".$_SESSION["token"]."&mail=". $_SESSION["mail"] ."\">Click here to activate your MedLed social account</a>", $headers);
+    send_mail($_SESSION["mail"], "MedLed social account activation", "Username:".$_SESSION["name"]." - Password:".$_SESSION["pass"]." - Email: ".$_SESSION["mail"]."<br><a href=\"localhost/medled/signup2.php?token=".$_SESSION["token"]."&mail=". $_SESSION["mail"] ."\">Click here to activate your MedLed social account</a>", $headers);
     // send_mail($_SESSION["mail"], "MedLed social account activation", "Username:".$_SESSION["name"]." - Email: ".$_SESSION["mail"]." - Password:".$_SESSION["pass"]."<br><a href=\"medtest.cf/signup2.php?token=".$_SESSION["token"]."&mail=". $_SESSION["mail"] ."\">Click here to activate your MedLed social account</a>", $headers);
 ?>
 

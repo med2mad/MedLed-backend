@@ -15,7 +15,7 @@
         $friendsArray = json_decode($data["friends"], true);
         mysqli_close($c);
         if (!isset($friendsArray[$_SESSION["id"]]) || $friendsArray[$_SESSION["id"]]==1) {
-            exit("404 3"); //if not friend or friend blocked you
+            exit("This user should befriend you first"); //if not friend or friend blocked you
         }
     }
 
@@ -168,7 +168,7 @@
     </div>
 
     <div class="col" style="margin:0px; padding:0px;overflow:auto; text-align:right"> <nobr>
-        <form method="POST" action="gallery.php#ppp">
+        <form method="POST" action="gallery.php?user=<?= $_GET["user"] ?>#ppp">
         From : <input type="date" name="date1" id="date1" value = "<?= $defdate1 ?>">
         To : <input type="date" name="date2" id="date2" value = "<?= $defdate2 ?>">
         <input type="submit" value="Filter">
@@ -242,7 +242,7 @@
 
     function refresh(){
         const perpage = document.getElementById("perpage").value;
-        if(perpage!=0){ window.location.href = "gallery.php?perpage=" + perpage + "<?= $date1.$date2 ?>#ppp"; }
+        if(perpage!=0){ window.location.href = "gallery.php?user=<?= $_GET["user"] ?>&perpage=" + perpage + "<?= $date1.$date2 ?>#ppp"; }
     }
 </script>
 
