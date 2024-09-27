@@ -14,8 +14,11 @@
 
         $friendsArray = json_decode($data["friends"], true);
         mysqli_close($c);
-        if (!isset($friendsArray[$_SESSION["id"]]) || $friendsArray[$_SESSION["id"]]==1) {
-            exit("This user should befriend you first"); //if not friend or friend blocked you
+        // if (!isset($friendsArray[$_SESSION["id"]]) || $friendsArray[$_SESSION["id"]]==1) {
+        //     exit("This user should befriend you first"); //if not friend
+        // }
+        if (isset($friendsArray[$_SESSION["id"]]) && $friendsArray[$_SESSION["id"]]==1) { //remove this
+            exit("This user blocked you"); //if friend blocked you
         }
     }
 

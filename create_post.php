@@ -1,4 +1,4 @@
-<?php include ("partials/header.php"); 
+<?php include ("partials/header.php");
     if(!isset($_SESSION["auth"]) || $_SESSION["auth"]!="true" || !isset($_SESSION["verified"]) || $_SESSION["verified"]==0){
         exit("Activate your account !");
     }
@@ -6,6 +6,24 @@
         exit("404 1");
     }
     if($_SESSION["blocked"]==1){ exit("404 2"); }
+
+    //exit if reader is blocked by admin / if reader is not a friend / if reader is a friend that blocked you
+    if(isset($_SESSION["type"]) && $_SESSION["type"]=="user") { //do not check if i'm admin
+        include ("partials/conn.php");
+        $d=mysqli_query ($c, "select friends,blocked from users WHERE id='".$_GET["id_r"]."'");
+        $data= mysqli_fetch_array($d);
+
+        if($data["blocked"]==1){ exit("server error #2"); } //if user is blocked by admin
+
+        $friendsArray = json_decode($data["friends"], true);
+        mysqli_close($c);
+        // if (!isset($friendsArray[$_SESSION["id"]]) || $friendsArray[$_SESSION["id"]]==1) {
+        //     exit("This user should befriend you first"); //if not friend or friend blocked you
+        // }
+        if (isset($friendsArray[$_SESSION["id"]]) && $friendsArray[$_SESSION["id"]]==1) { //remove this
+            exit("This user blocked you"); //if friend blocked you
+        }
+    }
 ?>
 
 <h1 style="overflow:auto;">Send a Message to <?= htmlspecialchars($_GET["name_r"]) ?></h1>

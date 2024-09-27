@@ -1,3 +1,7 @@
+gallery > "This user should befriend you first"
 when uploading change : conn.php , signup1.php (send mail), 
 maybe you should delete all tables then import a new sql file
 
+?? future-----
+befriend notification (accepted friend ship or som shit)
+remove : 1 mail can have 2 accounts + admin blocking one account blocks the other

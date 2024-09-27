@@ -48,11 +48,10 @@ if(isset($_POST["signup"]) || isset($_POST["update"])) {
         $mail = mysqli_real_escape_string ($c , $mail) ;
         $pass = mysqli_real_escape_string ($c , $_POST["pass"] ) ;
 
-        if(trim($_POST["mail"]) != $_SESSION["mail"]){
-            $d = mysqli_query ($c, "select id from users where mail = '".$mail."' limit 1");
-            if(mysqli_num_rows($d)>0)
-            {
-                header("Location: ".$_POST["page"]."?error=Email already used");
+        if($_POST["page"]=="create_user.php" || trim($_POST["mail"]) != $_SESSION["mail"]){
+            $d = mysqli_query ($c, "select id from users where mail = '".$mail."' limit 3");
+            if(mysqli_num_rows($d)>=2) {
+                header("Location: ".$_POST["page"]."?error=1 email address can be used to create only 2 accounts maximum");
                 exit;
             }
             $_SESSION["verified"]=0;
@@ -143,21 +142,6 @@ if(isset($_POST["create_gallery"])){
 }
 
 elseif(isset($_POST["post"])) {
-    //do not send the message if reader is blocked by admin / if reader is not a friend / reader is a friend that blocked you
-    if(isset($_SESSION["type"]) && $_SESSION["type"]=="user") { //do not check if i'm admin
-        include ("partials/conn.php");
-        $d=mysqli_query ($c, "select friends,blocked from users WHERE id='".$_POST["id_r"]."'");
-        $data= mysqli_fetch_array($d);
-
-        if($data["blocked"]==1){ exit("server error #2"); } //if user is blocked by admin
-
-        $friendsArray = json_decode($data["friends"], true);
-        mysqli_close($c);
-        if (!isset($friendsArray[$_SESSION["id"]]) || $friendsArray[$_SESSION["id"]]==1) {
-            exit("server error #3"); //if not friend or friend blocked you
-        }
-    }
-
     if(!strlen($_POST["id_r"]) || !is_numeric($_POST["id_r"])){
         exit("404 id");
     }
