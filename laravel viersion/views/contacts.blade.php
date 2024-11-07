@@ -1,6 +1,7 @@
-<?php  include ("partials/header.php"); ?>
+@include( 'partials.header' )
 
 <h1>Contacts</h1>
+
 <h2 class="bg-white fst-italic rounded-pill">Contact info :</h2>
 <div class="row">
     <table class="col-md">
@@ -49,7 +50,7 @@
                 </div> <!-- /.icon -->
             </div>
             </td>
-            <td class="phone" style="font-size:1.4rem; background-color: rgb(22, 22, 22);">Profile website</td>
+            <td class="phone" style="font-size:1.4rem; background-color: rgb(22, 22, 22);">Portfolio website</td>
             <td class="phone" style="font-size:1.4rem; width:100px;"></td>
         </tr>
     </table>
@@ -107,4 +108,4 @@
     </div>
 </div> 
 
-<?php include ("partials/footer.html"); ?>
+@include( 'partials.footer' )
