@@ -1,12 +1,4 @@
-const app = require('express')();
 const io = require('socket.io')(4000, {cors:'*'})
-const dialogflow = require('@google-cloud/dialogflow');
-const path = require('path');
-const cors = require('cors');
-
-const sessionClient = new dialogflow.SessionsClient({
-  keyFilename: path.join(__dirname, 'credentials.json')
-});
 
 io.on("connection", (socket)=>{
     socket.on('join', (username, userroom, userphoto)=>{
@@ -28,32 +20,40 @@ io.on("connection", (socket)=>{
 })
 
 
-// dialogflowClient.js ////////////////////////////////////
+////////////////////////////////////////////////// dialogflowClient.js ////////////////////////////////////
 
+// const dialogflow = require('@google-cloud/dialogflow');
+// const app = require('express')();
+// const cors = require('cors');
+// const path = require('path');
 
-async function detectIntent(sessionId, text) {
-  const sessionPath = sessionClient.projectAgentSessionPath('projectid-4444', sessionId);
-  const request = {
-    session: sessionPath,
-    queryInput: {
-      text: {
-        text: text,
-        languageCode: 'en',
-      },
-    },
-  };
+// const sessionClient = new dialogflow.SessionsClient({
+//   keyFilename: path.join(__dirname, 'credentials.json')
+// });
 
-  const [response] = await sessionClient.detectIntent(request);
-  const result = response.queryResult;
-  return result.fulfillmentText;
-}
+// async function detectIntent(sessionId, text) {
+//   const sessionPath = sessionClient.projectAgentSessionPath('projectid-4444', sessionId);
+//   const request = {
+//     session: sessionPath,
+//     queryInput: {
+//       text: {
+//         text: text,
+//         languageCode: 'en',
+//       },
+//     },
+//   };
 
-app.use(cors());
-app.get('/', async(req, res)=>{
-  try {
-    const botResponse = await detectIntent('sessionId', req.query.message);
-    res.json({answer:botResponse});
-  } catch (error) {console.log('errror : ' + error); res.send('errror : ' + error);}
-});
+//   const [response] = await sessionClient.detectIntent(request);
+//   const result = response.queryResult;
+//   return result.fulfillmentText;
+// }
 
-app.listen(5000, ()=>{console.log('listening on : 5000')});
+// app.use(cors());
+// app.get('/', async(req, res)=>{
+//   try {
+//     const botResponse = await detectIntent('sessionId', req.query.message);
+//     res.json({answer:botResponse});
+//   } catch (error) {console.log('errror : ' + error); res.send('errror : ' + error);}
+// });
+
+// app.listen(5000, ()=>{console.log('listening on : 5000')});
