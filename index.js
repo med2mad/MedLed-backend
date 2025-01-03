@@ -1,4 +1,5 @@
-const io = require('socket.io')(4000, {cors:'*'})
+const port = process.env.PORT || 4000;
+const io = require('socket.io')(port, {cors:'*'})
 
 io.on("connection", (socket)=>{
     socket.on('join', (username, userroom, userphoto)=>{
